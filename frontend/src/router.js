@@ -3,6 +3,7 @@ import LineOverview from './pages/LineOverview.vue'
 import StationList from './pages/StationList.vue'
 import StationDetail from './pages/StationDetail.vue'
 import RoutePlanner from './pages/RoutePlanner.vue'
+import QrTickets from './pages/QrTickets.vue'
 import FareRules from './pages/FareRules.vue'
 import NetworkEdges from './pages/NetworkEdges.vue'
 import TripHistory from './pages/TripHistory.vue'
@@ -15,6 +16,7 @@ export default createRouter({
     { path: '/stations', component: StationList },
     { path: '/stations/:code', component: StationDetail },
     { path: '/planner', component: RoutePlanner },
+    { path: '/tickets', component: QrTickets },
     { path: '/fares', component: FareRules },
     { path: '/network', component: NetworkEdges },
     { path: '/history', component: TripHistory },

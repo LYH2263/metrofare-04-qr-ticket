@@ -1,5 +1,6 @@
 from app.db import connect
 from app.engines.route_quote import quote_route
+from app.modules import qr_ticket
 from app.repositories import edges as edges_repo
 from app.repositories import fare_rules as rules_repo
 from app.repositories import runs as runs_repo
@@ -46,6 +47,21 @@ class MetroService:
 
     def history(self, limit=50):
         return runs_repo.list_recent(self._conn, limit)
+
+    def issue_ticket(self, run_id: int):
+        return qr_ticket.issue(self._conn, run_id)
+
+    def verify_ticket(self, code: str):
+        return qr_ticket.verify(self._conn, code)
+
+    def void_ticket(self, code: str, reason: str):
+        return qr_ticket.void(self._conn, code, reason)
+
+    def ticket(self, code: str):
+        return qr_ticket.get(self._conn, code)
+
+    def tickets(self, include_voided: bool = False):
+        return qr_ticket.list_tickets(self._conn, include_voided)
 
     def dashboard(self):
         st = stations_repo.list_all(self._conn)

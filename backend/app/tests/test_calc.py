@@ -1,5 +1,5 @@
 from app.engines.fare_rules import fare_for_hops
-from app.engines.graph_bfs import shortest_hops
+from app.engines.graph_bfs import shortest_hops, shortest_path
 from app.engines.route_quote import quote_route
 
 EDGES = [("A1", "A2"), ("A2", "A3"), ("A2", "B1"), ("B1", "B2")]
@@ -23,3 +23,16 @@ def test_fare_by_hops():
 def test_quote():
     q = quote_route(EDGES, "A1", "B2", RULES)
     assert q["hops"] == 3 and q["fare"] == 4.0
+
+
+def test_path_sequence():
+    assert shortest_path(EDGES, "A1", "B2") == ["A1", "A2", "B1", "B2"]
+    assert shortest_path(EDGES, "A1", "ZZ") is None
+    assert shortest_path(EDGES, "A1", "A1") == ["A1"]
+
+
+def test_quote_carries_path():
+    q = quote_route(EDGES, "A1", "B2", RULES)
+    assert q["reachable"] and q["path"] == ["A1", "A2", "B1", "B2"]
+    bad = quote_route(EDGES, "A1", "ZZ", RULES)
+    assert not bad["reachable"] and bad["path"] is None

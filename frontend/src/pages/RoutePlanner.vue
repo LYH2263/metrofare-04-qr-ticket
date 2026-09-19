@@ -18,6 +18,7 @@ const run = async () => { out.value = await postJSON('/api/quote', { start: star
     </div>
     <div v-if="out" class="panel">
       <p v-if="out.reachable">站数 {{ out.hops }} · 票价 <span class="hero-num">¥{{ out.fare }}</span></p>
+      <p v-if="out.reachable" class="muted">途经 {{ out.path.join(' → ') }}</p>
       <p v-else class="muted">不可达</p>
     </div>
   </div>

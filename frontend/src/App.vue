@@ -9,6 +9,7 @@
       <router-link to="/">线网</router-link>
       <router-link to="/stations">站点</router-link>
       <router-link to="/planner">票价试算</router-link>
+      <router-link to="/tickets">乘车码</router-link>
       <router-link to="/fares">规则</router-link>
       <router-link to="/network">邻接</router-link>
       <router-link to="/history">记录</router-link>

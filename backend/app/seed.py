@@ -2,6 +2,7 @@ import json
 
 from app.db import connect
 from app.engines.route_quote import quote_route
+from app.modules import qr_ticket
 
 EDGES = [("A1", "A2"), ("A2", "A3"), ("A2", "B1"), ("B1", "B2")]
 RULES = [{"max_hops": 2, "price": 3.0}, {"max_hops": 4, "price": 4.0}, {"max_hops": None, "price": 6.0}]
@@ -19,6 +20,7 @@ def init_db():
         id INTEGER PRIMARY KEY, kind TEXT, input_json TEXT, result_json TEXT, created_at TEXT);
     """
     )
+    qr_ticket.ensure_schema(conn)
     if conn.execute("SELECT COUNT(*) c FROM stations").fetchone()["c"] == 0:
         for code, name in [
             ("A1", "城站"),
