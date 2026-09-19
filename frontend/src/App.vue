@@ -12,6 +12,7 @@
       <router-link to="/fares">规则</router-link>
       <router-link to="/network">邻接</router-link>
       <router-link to="/history">记录</router-link>
+      <router-link to="/tickets">乘车码</router-link>
       <router-link to="/settings">设置</router-link>
     </nav>
     <router-view />

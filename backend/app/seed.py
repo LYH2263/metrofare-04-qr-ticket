@@ -17,6 +17,21 @@ def init_db():
     CREATE TABLE IF NOT EXISTS settings(key TEXT PRIMARY KEY, value TEXT);
     CREATE TABLE IF NOT EXISTS calc_runs(
         id INTEGER PRIMARY KEY, kind TEXT, input_json TEXT, result_json TEXT, created_at TEXT);
+    CREATE TABLE IF NOT EXISTS qr_tickets(
+        id INTEGER PRIMARY KEY,
+        code TEXT UNIQUE,
+        run_id INTEGER,
+        start TEXT,
+        end TEXT,
+        path_json TEXT,
+        hops INTEGER,
+        fare REAL,
+        status TEXT NOT NULL DEFAULT 'active',
+        void_reason TEXT,
+        created_at TEXT,
+        voided_at TEXT);
+    CREATE UNIQUE INDEX IF NOT EXISTS ux_qr_active_path
+        ON qr_tickets(path_json) WHERE status='active';
     """
     )
     if conn.execute("SELECT COUNT(*) c FROM stations").fetchone()["c"] == 0:

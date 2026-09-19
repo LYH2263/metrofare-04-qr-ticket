@@ -1,0 +1,7 @@
+services:
+  backend:
+    ports: !override
+      - "9210:9200"
+  frontend:
+    ports: !override
+      - "4210:80"

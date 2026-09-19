@@ -7,6 +7,7 @@ import FareRules from './pages/FareRules.vue'
 import NetworkEdges from './pages/NetworkEdges.vue'
 import TripHistory from './pages/TripHistory.vue'
 import Settings from './pages/Settings.vue'
+import QrTickets from './pages/QrTickets.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -18,6 +19,7 @@ export default createRouter({
     { path: '/fares', component: FareRules },
     { path: '/network', component: NetworkEdges },
     { path: '/history', component: TripHistory },
+    { path: '/tickets', component: QrTickets },
     { path: '/settings', component: Settings },
   ],
 })
